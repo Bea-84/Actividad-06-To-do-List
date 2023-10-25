@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Lista de Tareas</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Lista de Tareas</h1>
+        <form action="" method="post" class="mb-3">
+            <div class="input-group">
+                <input type="text" name="tarea" class="form-control" placeholder="Nueva Tarea">
+                <div class="input-group-append">
+                    <button id="enviar" type="submit" class="btn btn-primary">Agregar Tarea</button>
+                </div>
+            </div>
+        </form>
+        <h2>Tareas Pendientes</h2>
+        <ul id="lista" class="list-group">
+        </ul>
+    </div>
+
+    <script src="jquery.min.js"></script> 
+    <script>
+        $(document).ready(function() {
+            $("#enviar").click(function(e) {
+                e.preventDefault(); // Evitar que el formulario se envíe normalmente
+
+                $.post("index2.php", { tarea: $("input[name='tarea']").val() }, function(data, status) {
+                    $("#lista").html(data);
+                    $("input[name='tarea']").val(""); // Limpiar el campo de entrada
+                });
+            });
+        });
+    </script>
+</body>
+</html>
